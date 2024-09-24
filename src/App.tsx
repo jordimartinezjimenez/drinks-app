@@ -1,18 +1,31 @@
 import { lazy, Suspense } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import IndexPage from "./pages/IndexPage"
-import FavoritesPage from "./pages/FavoritesPage"
 import Layout from "./layouts/Layout"
-import NotFoundPage from "./pages/NotFoundPage"
+import Spinner from "./components/Spinner/Spinner"
+const IndexPage = lazy(() => import("./pages/IndexPage"))
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"))
+const FavoritesPage = lazy(() => import("./pages/FavoritesPage"))
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<IndexPage />} index />
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/" element={
+            <Suspense fallback={<Spinner />}>
+              <IndexPage />
+            </Suspense>
+          } index />
+          <Route path="*" element={
+            <Suspense fallback={<Spinner />}>
+              <NotFoundPage />
+            </Suspense>
+          } />
+          <Route path="/favorites" element={
+            <Suspense fallback={<Spinner />}>
+              <FavoritesPage />
+            </Suspense>
+          } />
         </Route>
       </Routes>
     </BrowserRouter>

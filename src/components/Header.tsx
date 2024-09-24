@@ -11,7 +11,7 @@ export default function Header() {
     const { pathname } = useLocation();
     const isHome = useMemo(() => pathname === "/", [pathname]);
 
-    const { fetchCategories, categories, searchRecipes } = useAppStore()
+    const { fetchCategories, categories, searchRecipes, showNotification } = useAppStore()
 
     useEffect(() => {
         fetchCategories()
@@ -30,6 +30,10 @@ export default function Header() {
 
         // Validation
         if (Object.values(searchFilters).includes("")) {
+            showNotification({
+                text: "All fields are required",
+                error: true
+            })
             return
         }
 

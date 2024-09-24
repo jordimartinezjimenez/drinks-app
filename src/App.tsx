@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import IndexPage from "./pages/IndexPage"
 import FavoritesPage from "./pages/FavoritesPage"

@@ -38,7 +38,7 @@ export const createRecipesSlice: StateCreator<RecipesSliceType & FavoriteSliceTy
     closeModal: () => {
         set({
             modal: false,
-            selectedRecipe: {} as Recipe
+            // selectedRecipe: {} as Recipe
         })
     }
 })
